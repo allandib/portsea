@@ -9,9 +9,11 @@ The sale page for Victorian Heritage plate 3944 (VIC 3944, Portsea's
 postcode) and the domain portsea.com.au (with portsea.au), for sale together
 or separately. It is the landing page for the owner's direct-mail postcard to
 postcode 3944: the card's QR code points to https://portsea.com.au, so the
-site has to be on that domain before the cards land. The headline and the
-plate's description are the postcard's own words; keep the two in step if
-either changes.
+site has to be on that domain before the cards land. The hero's small heading
+("Portsea's postcode is for sale.", the postcard's headline) and the plate's
+description are the postcard's own words; keep the two in step if either
+changes. The hero's main headline is "Victorian Heritage plate 3944", by the
+owner's choice.
 
 ## Decisions (November 2026)
 
