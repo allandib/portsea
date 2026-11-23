@@ -21,7 +21,7 @@ export const HERO = {
   /** A short line above the headline, or empty for none. */
   eyebrow: 'Portsea’s postcode is for sale.',
   /** A no-break space keeps 'plate 3944' together. */
-  headline: 'Victorian Heritage plate 3944',
+  headline: 'Victorian Heritage Plate 3944',
   /** A no-break space keeps 'sell you.' together, so the line never ends on a lone word. */
   subheadline: 'The only piece of Portsea no agent can sell\u00a0you.',
   /** One line under every button, or empty: what happens next, a guarantee, a limit. */

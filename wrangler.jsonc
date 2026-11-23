@@ -10,7 +10,12 @@
   // The site's own domain, once it has one. Declared here so every publish
   // keeps it attached: this list is the site's whole list, and a domain added
   // only in the Cloudflare dashboard is detached at the next publish.
-  // "routes": [{ "pattern": "example.com", "custom_domain": true }],
+  // portsea.com.au was attached in the dashboard on 23 November 2026; www
+  // had no DNS record, and the first publish from main creates it.
+  "routes": [
+    { "pattern": "portsea.com.au", "custom_domain": true },
+    { "pattern": "www.portsea.com.au", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./dist",
     // /about serves about.html; /about/ redirects to it.
