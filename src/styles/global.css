@@ -147,11 +147,15 @@
     font-weight: 700;
   }
 
-  /* A panel on the surface colour with a soft glow of the accent in two corners. */
+  /*
+   * A panel on the surface colour with a soft glow in two corners. The glow is
+   * accent-ink, the plate's brass: the accent here is black, which would only
+   * grey the corners.
+   */
   .panel {
     background:
-      radial-gradient(ellipse 70% 90% at 100% 10%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%),
-      radial-gradient(ellipse 60% 50% at 0% 100%, color-mix(in srgb, var(--accent) 6%, transparent), transparent 70%),
+      radial-gradient(ellipse 70% 90% at 100% 10%, color-mix(in srgb, var(--accent-ink) 14%, transparent), transparent 70%),
+      radial-gradient(ellipse 60% 50% at 0% 100%, color-mix(in srgb, var(--accent-ink) 6%, transparent), transparent 70%),
       var(--surface);
   }
 
@@ -240,8 +244,9 @@
     background: var(--accent);
     color: var(--paper);
   }
+  /* The accent is the plate's black, so the hover lifts it towards the ground rather than darkening it. */
   .btn-primary:hover {
-    background: color-mix(in srgb, var(--accent) 86%, var(--ink));
+    background: color-mix(in srgb, var(--accent) 82%, var(--paper));
   }
   /* The call to action through the page, and its slim copy in the header. */
   .btn-lg {
@@ -346,6 +351,121 @@
     font-size: 0.875rem;
     line-height: 1.55;
     color: var(--muted);
+  }
+
+  /*
+   * The enquiry form (EnquiryForm.astro), inside the form card. Fields sit on
+   * the paper colour; their edges are the muted role mixed towards paper,
+   * which stays above 3:1 so the boxes can be seen. Text in the fields is
+   * 16px, so phones don't zoom in when one is tapped.
+   */
+  .enquiry {
+    display: grid;
+    gap: 1.125rem;
+    margin-top: 1.5rem;
+    font-family: var(--body-font);
+  }
+  .form-split .enquiry {
+    grid-area: frame;
+    align-self: center;
+  }
+  @media (min-width: 48rem) {
+    .form-split .enquiry {
+      margin-top: 0;
+    }
+  }
+  .enquiry .field {
+    display: grid;
+    gap: 0.4rem;
+    min-width: 0;
+    margin: 0;
+    border: 0;
+    padding: 0;
+  }
+  .enquiry label,
+  .enquiry legend {
+    padding: 0;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .enquiry legend {
+    margin-bottom: 0.4rem;
+  }
+  .enquiry .optional {
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .enquiry input:not([type="radio"]),
+  .enquiry textarea {
+    width: 100%;
+    border: 1px solid color-mix(in srgb, var(--muted) 75%, var(--paper));
+    border-radius: 0.625rem;
+    background: var(--paper);
+    padding: 0.75rem 0.875rem;
+    font: inherit;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .enquiry textarea {
+    min-height: 7rem;
+    resize: vertical;
+  }
+  .enquiry input:not([type="radio"]):focus-visible,
+  .enquiry textarea:focus-visible {
+    border-color: var(--accent);
+    outline-offset: 1px;
+  }
+  .enquiry .choices {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .enquiry .choice {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border: 1px solid color-mix(in srgb, var(--muted) 75%, var(--paper));
+    border-radius: 0.625rem;
+    background: var(--paper);
+    padding: 0.7rem 0.875rem;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+  }
+  .enquiry .choice:has(input:checked) {
+    border-color: var(--accent);
+    box-shadow: inset 0 0 0 1px var(--accent);
+  }
+  .enquiry input[type="radio"] {
+    flex: none;
+    width: 1.125rem;
+    height: 1.125rem;
+    margin: 0;
+    accent-color: var(--accent);
+  }
+  /* What the form says if it can't send; empty, and so hidden, until then. */
+  .enquiry-status {
+    margin: 0;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .enquiry-status:empty {
+    display: none;
+  }
+  .enquiry button[disabled] {
+    cursor: progress;
+    opacity: 0.75;
+  }
+  /* The field that catches bots: off-screen, so people never see or reach it. */
+  .enquiry .trap {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
 
   .back-link {

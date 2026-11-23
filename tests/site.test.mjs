@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url';
 
 const DIST = fileURLToPath(new URL('../dist/', import.meta.url));
 // Node 22.18 and later strip the types, so the site's own facts are the expectations.
-const { SITE, NAV, CONTACT, FORMS } = await import('../src/data/site.ts');
+const { SITE, NAV, CONTACT, FORMS, ENQUIRY } = await import('../src/data/site.ts');
 const ORIGIN = SITE.url.replace(/\/$/, '');
 
 const read = (file) => readFileSync(join(DIST, file), 'utf8');
@@ -160,6 +160,25 @@ test('a contact form, when one is set, is embedded with the script that sizes it
   const html = read('contact.html');
   assert.ok(html.includes(`src="${FORMS.host}/widget/form/${FORMS.contact}"`), 'the contact page does not embed the contact form');
   assert.ok(html.includes(`src="${FORMS.host}/js/form_embed.js"`), 'the contact page does not load GHL’s form script, so the form is never sized');
+});
+
+test('the enquiry form, when one is set, posts to its address, labels every field and carries the bot trap', () => {
+  if (!ENQUIRY?.action) return;
+  assert.match(ENQUIRY.action, /^https:\/\/[^/]+\/\S+$/, 'ENQUIRY.action in src/data/site.ts should be the full https address the form posts to');
+  for (const file of ['index.html', 'contact.html']) {
+    const form = read(file).match(/<form\b[^>]*class="enquiry"[\s\S]*?<\/form>/)?.[0];
+    assert.ok(form, `${file}: the enquiry form is missing`);
+    assert.ok(form.includes(`action="${ENQUIRY.action}"`), `${file}: the enquiry form does not post to ENQUIRY.action`);
+    assert.match(form, /\smethod="post"/, `${file}: the enquiry form must post`);
+    assert.ok(form.includes(`name="${ENQUIRY.trap}"`), `${file}: the enquiry form has no bot trap named ${ENQUIRY.trap}`);
+    for (const name of ['name', 'email', 'interest']) {
+      assert.match(form, new RegExp(`name="${name}"[^>]*\\srequired`), `${file}: the ${name} field should be required`);
+    }
+    for (const [, id] of form.matchAll(/<(?:input|textarea|select)\b[^>]*\sid="([^"]+)"/g)) {
+      assert.ok(form.includes(`for="${id}"`), `${file}: the field ${id} has no label`);
+    }
+  }
+  assert.ok(existsSync(join(DIST, 'thanks.html')), 'the form sends people to /thanks, which the site does not build');
 });
 
 test('the sitemap lists exactly the pages, and robots.txt points at it', () => {

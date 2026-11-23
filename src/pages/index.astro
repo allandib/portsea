@@ -6,46 +6,49 @@
  * id). The header's links and the button point at these ids.
  */
 import Base from '../layouts/Base.astro';
-import Cards from '../components/Cards.astro';
+import Band from '../components/Band.astro';
 import Checklist from '../components/Checklist.astro';
 import Cta from '../components/Cta.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
 import Faq from '../components/Faq.astro';
+import Gallery from '../components/Gallery.astro';
 import Hero from '../components/Hero.astro';
 import LeadForm from '../components/LeadForm.astro';
-import MediaText from '../components/MediaText.astro';
-import Rows from '../components/Rows.astro';
 import Steps from '../components/Steps.astro';
-import Testimonials from '../components/Testimonials.astro';
 import TextBlock from '../components/TextBlock.astro';
-import { CONTACT, FORMS, SITE } from '../data/site';
-import { ABOUT, CONTACT_SECTION, FAQS, INTRO, OFFER, OUTCOMES, PROBLEMS, STEPS, STORIES } from '../data/home';
+import { CONTACT, ENQUIRY, FORMS, SITE } from '../data/site';
+import { CONTACT_SECTION, DOMAIN, FAQS, GIFT_CTA, PHOTOS, PLATE, SELLER, STEPS } from '../data/home';
 
 const hasForm = Boolean(FORMS.contact);
+const formNote = `${CONTACT_SECTION.note} Prefer email? Write to <a href="mailto:${CONTACT.email}">${CONTACT.email}</a>.`;
+const title = 'Portsea’s postcode is for sale: Heritage plate 3944 and portsea.com.au';
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
+  '@type': 'WebSite',
   name: SITE.name,
   url: SITE.url,
   description: SITE.description,
 };
 ---
 
-<Base title={SITE.name} description={SITE.description} path="/" jsonLd={jsonLd} hasForm={hasForm}>
+<Base title={title} description={SITE.description} path="/" jsonLd={jsonLd} hasForm={hasForm}>
   <Hero />
-  <TextBlock id="what" title={INTRO.title} paragraphs={INTRO.paragraphs} />
-  <Cards id="problems" title={PROBLEMS.title} intro={PROBLEMS.intro} cards={PROBLEMS.cards} outro={PROBLEMS.outro} />
-  <Checklist id="outcomes" title={OUTCOMES.title} lead={OUTCOMES.lead} items={OUTCOMES.items} />
+  <Checklist id="plate" title={PLATE.title} paragraphs={PLATE.paragraphs} lead={PLATE.lead} items={PLATE.items} />
+  <Gallery label="Close-ups of the certificate and the book" photos={PHOTOS} />
+  <TextBlock id="about" title={SELLER.title} paragraphs={SELLER.paragraphs} />
+  <Cta heading={GIFT_CTA} note="" class="pt-4 pb-16 sm:pb-20" />
+  <Band>
+    <TextBlock id="domain" eyebrow={DOMAIN.eyebrow} title={DOMAIN.title} large paragraphs={DOMAIN.paragraphs} />
+  </Band>
   <Steps id="how" title={STEPS.title} subtitle={STEPS.subtitle} items={STEPS.items} image={STEPS.image} alt={STEPS.alt} />
-  <Testimonials id="stories" title={STORIES.title} items={STORIES.items} />
-  <Cta class="pb-8" />
-  <MediaText id="about" title={ABOUT.title} image={ABOUT.image} alt={ABOUT.alt} caption={ABOUT.caption} paragraphs={ABOUT.paragraphs} link={ABOUT.link} />
-  <Rows id="offer" title={OFFER.title} rows={OFFER.rows} />
   <Faq id="faqs" title={FAQS.title} items={FAQS.items} />
 
   <section id="contact" class="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-20">
     <h2 class="heading-2">{CONTACT_SECTION.title}</h2>
     {
-      hasForm ? (
+      ENQUIRY.action ? (
+        <EnquiryForm lead={CONTACT_SECTION.lead} note={formNote} suffix="home" split />
+      ) : hasForm ? (
         <LeadForm lead={CONTACT_SECTION.lead} suffix="home" split />
       ) : (
         <div class="mt-6 max-w-[42rem]">

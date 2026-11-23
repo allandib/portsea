@@ -2,19 +2,36 @@
 /**
  * The first screen: who it is for, the headline, the result in a sentence or
  * two, the button with its one line of reassurance, and the track record.
+ *
+ * With a picture (HERO.image) the words sit beside it on wide screens and the
+ * picture comes first on phones, so it is seen before anything else. It loads
+ * first, so no other part on the home page takes `priority`.
  */
+import { Image } from 'astro:assets';
 import Button from './Button.astro';
 import Proof from './Proof.astro';
 import { HERO, PROOF } from '../data/home';
+const { image, alt } = HERO;
 ---
 
-<section class="mx-auto max-w-6xl px-5 pt-12 pb-12 sm:px-8 sm:pt-20 sm:pb-16">
-  {HERO.eyebrow && <p class="eyebrow">{HERO.eyebrow}</p>}
-  <h1 class="heading-1 mt-4 max-w-4xl">{HERO.headline}</h1>
-  <p class="mt-6 max-w-2xl font-body text-[1.1875rem] leading-relaxed text-muted sm:text-[1.375rem]" set:html={HERO.subheadline} />
-  <div class="mt-9">
-    <Button />
+<section class="mx-auto max-w-6xl px-5 pt-8 pb-12 sm:px-8 sm:pt-20 sm:pb-16">
+  <div class:list={[image && 'grid items-center gap-8 md:grid-cols-2 md:gap-12']}>
+    {
+      image && (
+        <div class="md:order-last">
+          <Image src={image} alt={alt ?? ''} priority widths={[480, 800, 1290]} sizes="(min-width: 1152px) 540px, (min-width: 768px) 46vw, 100vw" class="w-full rounded-2xl shadow-xl" />
+        </div>
+      )
+    }
+    <div>
+      {HERO.eyebrow && <p class="eyebrow">{HERO.eyebrow}</p>}
+      <h1 class="heading-1 mt-4 max-w-4xl">{HERO.headline}</h1>
+      <p class="mt-6 max-w-2xl font-body text-[1.1875rem] leading-relaxed text-muted sm:text-[1.375rem]" set:html={HERO.subheadline} />
+      <div class="mt-9">
+        <Button />
+      </div>
+      {HERO.note && <p class="mt-3 max-w-md font-body text-[0.9375rem] leading-relaxed text-muted">{HERO.note}</p>}
+    </div>
   </div>
-  {HERO.note && <p class="mt-3 max-w-md font-body text-[0.9375rem] leading-relaxed text-muted">{HERO.note}</p>}
   {PROOF.length > 0 && <Proof class="mt-12 sm:mt-14" />}
 </section>

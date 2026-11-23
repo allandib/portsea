@@ -1,18 +1,30 @@
 ---
-/** A heading, one lead line, then a tick list: the outcomes a customer wants, or what is included. */
+/**
+ * A heading, optional paragraphs, one lead line, then a tick list: the
+ * outcomes a customer wants, or what is included.
+ */
 interface Props {
   id: string;
   title: string;
+  /** Paragraphs between the heading and the lead, or none. */
+  paragraphs?: readonly string[];
   lead?: string;
   items: readonly string[];
 }
-const { id, title, lead, items } = Astro.props;
+const { id, title, paragraphs = [], lead, items } = Astro.props;
 ---
 
 <section id={id} class="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-20">
   <div class="max-w-[42rem]">
     <h2 class="heading-2">{title}</h2>
-    {lead && <p class="mt-6 font-body text-[1.25rem] leading-snug font-bold sm:text-[1.375rem]">{lead}</p>}
+    {
+      paragraphs.length > 0 && (
+        <div class="copy mt-6 space-y-5 font-body text-[1.0625rem] leading-relaxed sm:text-[1.1875rem]">
+          {paragraphs.map((p) => <p set:html={p} />)}
+        </div>
+      )
+    }
+    {lead && <p class:list={['font-body text-[1.25rem] leading-snug font-bold sm:text-[1.375rem]', paragraphs.length > 0 ? 'mt-8' : 'mt-6']}>{lead}</p>}
     <ul role="list" class="mt-6 space-y-4">
       {
         items.map((item) => (

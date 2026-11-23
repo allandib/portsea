@@ -1,0 +1,108 @@
+---
+/**
+ * The enquiry form, in a card: a plain HTML form whose action is ENQUIRY.action
+ * in src/data/site.ts, a Zapier catch hook that emails the owner. No embed.
+ *
+ * Zapier answers a form with a page of its own and can't send the visitor
+ * back, so the small script at the end sends the form in the background and
+ * then opens /thanks. It can't read Zapier's answer (a page may not read
+ * another site's reply), so it counts the form as sent when the request goes
+ * out, and shows the email address if the request can't be made at all.
+ * Without JavaScript the form still posts, and the visitor sees Zapier's
+ * plain reply instead of /thanks.
+ *
+ * `split` puts the words beside the form on wide screens, as LeadForm does;
+ * the stacked version is for narrow columns. `suffix` keeps the field ids
+ * unique on the page. The browser checks the required fields before sending.
+ * The hidden field (ENQUIRY.trap) sits off-screen and out of the tab order:
+ * people never fill it, bots do, and the workflow drops what they send.
+ * `page` carries the address the enquiry was sent from, query string and all,
+ * so an enquiry from a tagged link (a postcard's QR code) says which one.
+ */
+import { CONTACT, ENQUIRY, SITE } from '../data/site';
+
+interface Props {
+  lead: string;
+  /** A line under the form; inline HTML (a link) is allowed. */
+  note?: string;
+  /** Unique on the page; becomes part of every field id. */
+  suffix: string;
+  split?: boolean;
+}
+const { lead, note, suffix, split = false } = Astro.props;
+const id = (name: string) => `enquiry-${name}-${suffix}`;
+---
+
+<div class:list={['form-card', split && 'form-split']}>
+  <p class="form-lead">{lead}</p>
+  <form class="enquiry" action={ENQUIRY.action} method="post" accept-charset="utf-8">
+    <div class="field">
+      <label for={id('name')}>Your name</label>
+      <input id={id('name')} name="name" type="text" autocomplete="name" required maxlength="120" />
+    </div>
+    <div class="field">
+      <label for={id('email')}>Email</label>
+      <input id={id('email')} name="email" type="email" autocomplete="email" required maxlength="200" />
+    </div>
+    <div class="field">
+      <label for={id('phone')}>Phone <span class="optional">(optional)</span></label>
+      <input id={id('phone')} name="phone" type="tel" autocomplete="tel" maxlength="40" />
+    </div>
+    <fieldset class="field">
+      <legend>Interested in</legend>
+      <div class="choices">
+        {
+          ENQUIRY.choices.map((choice, i) => (
+            <label class="choice" for={id(`interest-${i}`)}>
+              <input id={id(`interest-${i}`)} type="radio" name="interest" value={choice.value} required />
+              <span>{choice.label}</span>
+            </label>
+          ))
+        }
+      </div>
+    </fieldset>
+    <div class="field">
+      <label for={id('offer')}>Your offer <span class="optional">(optional)</span></label>
+      <input id={id('offer')} name="offer" type="text" maxlength="120" />
+    </div>
+    <div class="field">
+      <label for={id('message')}>Anything else <span class="optional">(optional)</span></label>
+      <textarea id={id('message')} name="message" rows="4" maxlength="4000"></textarea>
+    </div>
+    <div class="trap" aria-hidden="true">
+      <label for={id('trap')}>Leave this empty</label>
+      <input id={id('trap')} name={ENQUIRY.trap} type="text" tabindex="-1" autocomplete="off" />
+    </div>
+    <input type="hidden" name="page" value={SITE.url} />
+    <div>
+      <button type="submit" class="btn btn-primary btn-lg">Send enquiry</button>
+    </div>
+    <p class="enquiry-status" role="status" data-failed={`That didn’t send. Please email ${CONTACT.email} instead.`}></p>
+  </form>
+  {note && <p class="form-note" set:html={note} />}
+</div>
+
+<script is:inline>
+  // Send the enquiry in the background, then show /thanks (see the note at the top).
+  for (const form of document.querySelectorAll('form.enquiry:not([data-ready])')) {
+    form.dataset.ready = '';
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const button = form.querySelector('button[type="submit"]');
+      const status = form.querySelector('.enquiry-status');
+      const label = button.textContent;
+      form.elements.page.value = location.href;
+      button.disabled = true;
+      button.textContent = 'Sending…';
+      status.textContent = '';
+      try {
+        await fetch(form.action, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(new FormData(form)) });
+        location.assign('/thanks');
+      } catch {
+        button.disabled = false;
+        button.textContent = label;
+        status.textContent = status.dataset.failed;
+      }
+    });
+  }
+</script>

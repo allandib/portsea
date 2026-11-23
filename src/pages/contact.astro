@@ -6,13 +6,14 @@
  * the page stands on the details alone.
  */
 import Base from '../layouts/Base.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
 import LeadForm from '../components/LeadForm.astro';
-import { CONTACT, FORMS, SITE } from '../data/site';
+import { CONTACT, ENQUIRY, FORMS, SITE } from '../data/site';
 
 const title = 'Contact';
-const description = `How to reach ${SITE.name}: the email address, the phone number and the postal address.`;
-const intro = `Questions for ${SITE.name}? Here’s how to reach us.`;
-const formLead = 'Send us a message and we’ll get back to you.';
+const description = 'How to get in touch about Victorian Heritage plate 3944 and the domain portsea.com.au, for sale together or separately.';
+const intro = 'Interested in Heritage plate 3944, portsea.com.au or both? Here’s how to reach me.';
+const formLead = 'Send me a message and I’ll get back to you personally.';
 const hasForm = Boolean(FORMS.contact);
 const row = 'grid gap-1 py-5 sm:grid-cols-[8rem_minmax(0,1fr)] sm:gap-8';
 const term = 'font-bold text-accent-ink';
@@ -24,7 +25,7 @@ const term = 'font-bold text-accent-ink';
     <h1 class="heading-2 mt-6">{title}</h1>
     <p class="mt-6 font-body text-[1.0625rem] leading-relaxed sm:text-[1.1875rem]">{intro}</p>
 
-    {hasForm && <LeadForm lead={formLead} suffix="contact" />}
+    {ENQUIRY.action ? <EnquiryForm lead={formLead} suffix="contact" /> : hasForm && <LeadForm lead={formLead} suffix="contact" />}
 
     <dl class="mt-10 divide-y divide-line border-y border-line font-body text-[1.0625rem] leading-relaxed">
       <div class={row}>
