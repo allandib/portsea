@@ -5,7 +5,7 @@ nothing private goes in here: no phone numbers, prices or mailing details.
 
 ## What the site is
 
-The sale page for Victorian Heritage plate 3944 (VIC 3·944, Portsea's
+The sale page for Victorian Heritage plate 3944 (VIC 3944, Portsea's
 postcode) and the domain portsea.com.au (with portsea.au), for sale together
 or separately. It is the landing page for the owner's direct-mail postcard to
 postcode 3944: the card's QR code points to https://portsea.com.au, so the
@@ -21,6 +21,8 @@ either changes.
   the site (`CONTACT.email`). No phone number. The owner's own address stays
   off the site and out of this repository.
 - **No "How it works" section.** The owner took it out.
+- **The plate number is written 3944,** with no dot (not 3·944 or 3.944), in
+  all the site's text. The photographs show the plate as it is.
 - **Price:** offers invited, no figure. If the owner settles on one (the
   postcard has a slot for "Offers over $…"), put the same line on the site:
   the hero and the "Is there an asking price?" question.

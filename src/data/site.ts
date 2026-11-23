@@ -92,7 +92,7 @@ export const ENQUIRY = {
   trap: 'leave_empty',
   /** What the visitor is interested in: `value` is what the email shows, and the workflow accepts only these. */
   choices: [
-    { value: 'The plate', label: 'The plate, VIC 3·944' },
+    { value: 'The plate', label: 'The plate, VIC 3944' },
     { value: 'The domain', label: 'The domain, portsea.com.au' },
     { value: 'Both', label: 'Both' },
   ],

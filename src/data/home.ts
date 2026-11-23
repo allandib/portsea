@@ -27,7 +27,7 @@ export const HERO = {
   note: 'The domain portsea.com.au is for sale too, together or separately.',
   /** A picture beside the words (above them on phones), or leave both out. It loads first. */
   image: plateInCase as ImageMetadata | undefined,
-  alt: 'The VIC 3·944 Heritage plate, black enamel with white numerals, in its presentation case above the Heritage Plates book and the signed and sealed VicRoads certificate',
+  alt: 'The VIC 3944 Heritage plate, black enamel with white numerals, in its presentation case above the Heritage Plates book and the signed and sealed VicRoads certificate',
 };
 
 /** Short facts under the hero's button: up to four. An empty list hides the row. */
@@ -40,7 +40,7 @@ export const PLATE = {
   ],
   lead: 'What comes with it',
   items: [
-    'Brand-new VIC 3·944 Heritage plates',
+    'Brand-new VIC 3944 Heritage plates',
     'The VicRoads presentation case',
     'The certificate of authenticity, signed and sealed',
     'The book, <em>Heritage Plates: The Story of an Icon</em>',
@@ -51,7 +51,7 @@ export const PLATE = {
 export const PHOTOS = [
   {
     image: certificate,
-    alt: 'The VicRoads Heritage Plates certificate for 3.944, signed by the chief executive of VicRoads Registration and Licensing Services, with a red wax seal',
+    alt: 'The VicRoads Heritage Plates certificate for plate 3944, signed by the chief executive of VicRoads Registration and Licensing Services, with a red wax seal',
     caption: 'The certificate, signed by VicRoads’ chief executive and sealed in red wax.',
   },
   {
