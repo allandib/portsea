@@ -14,10 +14,9 @@ import Faq from '../components/Faq.astro';
 import Gallery from '../components/Gallery.astro';
 import Hero from '../components/Hero.astro';
 import LeadForm from '../components/LeadForm.astro';
-import Steps from '../components/Steps.astro';
 import TextBlock from '../components/TextBlock.astro';
 import { CONTACT, ENQUIRY, FORMS, SITE } from '../data/site';
-import { CONTACT_SECTION, DOMAIN, FAQS, GIFT_CTA, PHOTOS, PLATE, SELLER, STEPS } from '../data/home';
+import { CONTACT_SECTION, DOMAIN, FAQS, GIFT_CTA, PHOTOS, PLATE, SELLER } from '../data/home';
 
 const hasForm = Boolean(FORMS.contact);
 const formNote = `${CONTACT_SECTION.note} Prefer email? Write to <a href="mailto:${CONTACT.email}">${CONTACT.email}</a>.`;
@@ -40,7 +39,6 @@ const jsonLd = {
   <Band>
     <TextBlock id="domain" eyebrow={DOMAIN.eyebrow} title={DOMAIN.title} large paragraphs={DOMAIN.paragraphs} />
   </Band>
-  <Steps id="how" title={STEPS.title} subtitle={STEPS.subtitle} items={STEPS.items} image={STEPS.image} alt={STEPS.alt} />
   <Faq id="faqs" title={FAQS.title} items={FAQS.items} />
 
   <section id="contact" class="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-20">

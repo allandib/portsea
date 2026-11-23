@@ -50,7 +50,7 @@ export const FOOTER_LINKS = [{ href: '/contact', label: 'Contact' }];
 
 /** How to reach the business: the contact page, and the home page's contact section when there is no form. */
 export const CONTACT = {
-  email: 'allan@dib.net',
+  email: 'DomainServicesCo@gmail.com',
   /** The phone number as it should be shown, or empty for none. */
   phone: '',
   /** The same number as a link, such as 'tel:+61400000000', or empty. */

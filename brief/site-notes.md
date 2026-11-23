@@ -17,7 +17,10 @@ either changes.
 
 - **No name on the site.** The owner asked for his name to stay off it. The
   suburb he lives in is off it too.
-- **Email:** allan@dib.net is the address shown. No phone number.
+- **Email:** DomainServicesCo@gmail.com is the address shown, everywhere on
+  the site (`CONTACT.email`). No phone number. The owner's own address stays
+  off the site and out of this repository.
+- **No "How it works" section.** The owner took it out.
 - **Price:** offers invited, no figure. If the owner settles on one (the
   postcard has a slot for "Offers over $…"), put the same line on the site:
   the hero and the "Is there an asking price?" question.
@@ -26,8 +29,8 @@ either changes.
   down GoHighLevel and then n8n). `ENQUIRY` in `src/data/site.ts` holds the
   catch-hook address; `src/components/EnquiryForm.astro` sends the form in the
   background and then shows `/thanks`. The Zapier workflow, "Portsea Sale
-  Enquiries" in the owner's Zapier account, emails each enquiry to
-  allan@dib.net with Reply-To set to the buyer, and drops anything that fills
+  Enquiries" in the owner's Zapier account, emails each enquiry to the owner
+  with Reply-To set to the buyer, and drops anything that fills
   the hidden `leave_empty` field. Don't swap it for a GoHighLevel embed.
 - **Photos** are the owner's own, from his Facebook post, cut from a phone
   screenshot. Full-size originals would be better when he has them.

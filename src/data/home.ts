@@ -80,28 +80,6 @@ export const DOMAIN = {
   ],
 };
 
-export const STEPS = {
-  title: 'How it works',
-  subtitle: 'From enquiry to handover',
-  /** A photograph beside the steps, or leave both out for the steps alone. */
-  image: undefined as ImageMetadata | undefined,
-  alt: '',
-  items: [
-    {
-      label: 'Make an enquiry',
-      paragraphs: ['Tell me whether you’re after the plate, the domain or both, and add an offer if you have one in mind.'],
-    },
-    {
-      label: 'We talk it through',
-      paragraphs: ['I’ll get back to you personally to answer your questions and agree a price.'],
-    },
-    {
-      label: 'It changes hands',
-      paragraphs: ['The plate is transferred into your name through VicRoads, and the domain through its registrar.'],
-    },
-  ],
-};
-
 export const FAQS = {
   title: 'Questions',
   items: [
