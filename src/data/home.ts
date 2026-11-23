@@ -102,6 +102,8 @@ export const FAQS = {
 export const CONTACT_SECTION = {
   title: 'Make an enquiry',
   lead: 'Tell me which you’re interested in (the plate, the domain or both) and how best to reach you. I’ll reply personally.',
-  /** Under the form; the page adds the email address after it. */
+  /** Under the form, followed by `alternative`. */
   note: 'Your details come straight to me, and I’ll use them only to reply.',
+  /** Another way to get in touch, after the note. The link opens a text message on a phone. */
+  alternative: 'Alternatively, text Allan on <a href="sms:+61481615715">0481 615 715</a>.',
 };

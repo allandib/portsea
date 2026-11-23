@@ -12,16 +12,17 @@ postcode 3944: the card's QR code points to https://portsea.com.au, so the
 site has to be on that domain before the cards land. The hero's small heading
 ("Portsea's postcode is for sale.", the postcard's headline) and the plate's
 description are the postcard's own words; keep the two in step if either
-changes. The hero's main headline is "Victorian Heritage plate 3944", by the
+changes. The hero's main headline is "Victorian Heritage Plate 3944", by the
 owner's choice.
 
 ## Decisions (November 2026)
 
-- **No name on the site.** The owner asked for his name to stay off it. The
-  suburb he lives in is off it too.
+- **First name only.** The owner asked for his name to stay off the site,
+  then for one line under the form: "Alternatively, text Allan on 0481 615 715"
+  (a text-message link). No surname anywhere, and his suburb stays off too.
 - **Email:** DomainServicesCo@gmail.com is the address shown, everywhere on
-  the site (`CONTACT.email`). No phone number. The owner's own address stays
-  off the site and out of this repository.
+  the site (`CONTACT.email`). The owner's own address stays off the site and
+  out of this repository. His mobile appears only in the line under the form.
 - **No "How it works" section.** The owner took it out.
 - **The plate number is written 3944,** with no dot (not 3·944 or 3.944), in
   all the site's text. The photographs show the plate as it is.

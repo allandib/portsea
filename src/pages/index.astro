@@ -19,7 +19,7 @@ import { CONTACT, ENQUIRY, FORMS, SITE } from '../data/site';
 import { CONTACT_SECTION, DOMAIN, FAQS, GIFT_CTA, PHOTOS, PLATE, SELLER } from '../data/home';
 
 const hasForm = Boolean(FORMS.contact);
-const formNote = `${CONTACT_SECTION.note} Prefer email? Write to <a href="mailto:${CONTACT.email}">${CONTACT.email}</a>.`;
+const formNote = `${CONTACT_SECTION.note} ${CONTACT_SECTION.alternative}`;
 const title = 'Portsea’s postcode is for sale: Heritage plate 3944 and portsea.com.au';
 const jsonLd = {
   '@context': 'https://schema.org',
